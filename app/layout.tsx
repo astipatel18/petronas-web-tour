@@ -84,9 +84,9 @@ const playfair = Playfair_Display({
   display: 'swap',
 });
 
-// 🚀 VIEWPORT CONFIGURATION (Standard for Next.js 14+)
+// 🚀 VIEWPORT CONFIGURATION
 export const viewport: Viewport = {
-  themeColor: '#020617', // Match slate-950
+  themeColor: '#020617', 
   width: 'device-width',
   initialScale: 1,
 };
@@ -102,8 +102,6 @@ export const metadata: Metadata = {
   authors: [{ name: 'Petronas Management' }],
   
   // 🛡️ RESOURCE PRE-FETCHING
-  // This tells the browser to start connecting to Unsplash before images are even requested.
-  // Shaves off ~200ms - 400ms of latency.
   other: {
     "preconnect": "https://images.unsplash.com",
     "dns-prefetch": "https://images.unsplash.com",
@@ -129,17 +127,18 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className="scroll-smooth" suppressHydrationWarning>
+    <html 
+      lang="en" 
+      className="scroll-smooth" 
+      // 🚀 FIX: This attribute tells Next.js how to handle smooth scroll during route changes
+      data-scroll-behavior="smooth" 
+      suppressHydrationWarning
+    >
       <body 
         className={`${inter.variable} ${playfair.variable} font-sans bg-slate-950 text-slate-200 antialiased`} 
         suppressHydrationWarning
       >
         <Providers>
-          {/* 
-              🚀 Performance Layout Pattern: 
-              Min-h-screen with flex-col allows the footer to stay pinned 
-              without expensive JS calculations.
-          */}
           <div className="flex flex-col min-h-screen">
             <main className="grow">
               {children}
