@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { motion, AnimatePresence } from "framer-motion";
+import { m, AnimatePresence } from "framer-motion";
 import { Menu, X, ChevronRight, ChevronDown, Rotate3d } from "lucide-react";
 import { Container } from "./Container";
 import { cn } from "@/lib/utils";
@@ -118,7 +118,7 @@ export default function Navbar() {
                   
                   {/* Underline for non-dropdown active links */}
                   {pathname === link.href && !isVisitOpen && !link.hasDropdown && (
-                    <motion.div 
+                    <m.div 
                         layoutId="navUnderline"
                         className="absolute bottom-0 left-3 right-3 h-px bg-cyan-500"
                     />
@@ -159,7 +159,7 @@ export default function Navbar() {
       {/* 5. MOBILE MENU OVERLAY */}
       <AnimatePresence>
         {isMobileOpen && (
-          <motion.div
+          <m.div
             initial={{ opacity: 0, x: "100%" }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: "100%" }}
@@ -196,7 +196,7 @@ export default function Navbar() {
 
                   {/* Mobile Accordion for Visit */}
                   {link.hasDropdown && (
-                    <motion.div 
+                    <m.div 
                       initial={false}
                       animate={{ height: mobileVisitOpen ? "auto" : 0, opacity: mobileVisitOpen ? 1 : 0 }}
                       className="overflow-hidden flex flex-col pl-4 space-y-5"
@@ -205,7 +205,7 @@ export default function Navbar() {
                       <Link href="/visit/facilities" className="text-silver uppercase tracking-widest text-xs">Facilities</Link>
                       <Link href="/visit/admission" className="text-silver uppercase tracking-widest text-xs">Tickets & Admission</Link>
                       <Link href="/visit/agent-portal" className="text-silver uppercase tracking-widest text-xs pb-4">Agent Portal</Link>
-                    </motion.div>
+                    </m.div>
                   )}
                 </div>
               ))}
@@ -220,7 +220,7 @@ export default function Navbar() {
                   Book Tickets <ChevronRight size={16} />
               </Link>
             </div>
-          </motion.div>
+          </m.div>
         )}
       </AnimatePresence>
     </nav>

@@ -2,7 +2,7 @@
 
 import { useBookingStore } from "@/store/useBookingStore";
 import { Container } from "@/components/shared/Container";
-import { motion, AnimatePresence } from "framer-motion";
+import { m, AnimatePresence } from "framer-motion";
 
 // Import all 6 Steps
 import Step1_Attractions from "@/components/booking/Step1_Attractions";
@@ -37,7 +37,7 @@ export default function BookingPage() {
             <div className="absolute top-1/2 left-0 w-full h-0.5 bg-slate-200 -translate-y-1/2 z-0" />
             
             {/* Animated Active Track (Calculated for 6 steps) */}
-            <motion.div 
+            <m.div 
               className="absolute top-1/2 left-0 h-0.5 bg-cyan-600 -translate-y-1/2 z-0"
               initial={{ width: "0%" }}
               animate={{ width: `${((step - 1) / (stepLabels.length - 1)) * 100}%` }}
@@ -53,7 +53,7 @@ export default function BookingPage() {
               return (
                 <div key={label} className="relative z-10 flex flex-col items-center">
                   {/* Step Circle */}
-                  <motion.div 
+                  <m.div 
                     animate={{ 
                         scale: isCurrent ? 1.15 : 1,
                         backgroundColor: isFuture ? "#ffffff" : "#0891b2" 
@@ -67,7 +67,7 @@ export default function BookingPage() {
                     }`}
                   >
                     {isPast ? "✓" : stepNum}
-                  </motion.div>
+                  </m.div>
 
                   {/* Step Label (Hidden on tiny screens to prevent overlap) */}
                   <span 
@@ -87,7 +87,7 @@ export default function BookingPage() {
         <div className="max-w-5xl mx-auto">
           <div className="bg-white border border-slate-200 shadow-2xl shadow-slate-200/60 rounded-none overflow-hidden min-h-125">
             <AnimatePresence mode="wait">
-              <motion.div
+              <m.div
                 key={step}
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -102,7 +102,7 @@ export default function BookingPage() {
                 {step === 4 && <Step4_Cart />}
                 {step === 5 && <Step5_Checkout />}
                 {step === 6 && <Step6_Verification />}
-              </motion.div>
+              </m.div>
             </AnimatePresence>
           </div>
 

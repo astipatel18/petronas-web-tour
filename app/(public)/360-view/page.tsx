@@ -2,7 +2,8 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { useRouter } from "next/navigation";
-import { motion, AnimatePresence } from "framer-motion";
+// import { motion, AnimatePresence } from "framer-motion";
+import { m , AnimatePresence} from "framer-motion";
 import { Container } from "@/components/shared/Container";
 import { 
   Rotate3d, 
@@ -74,7 +75,7 @@ export default function VirtualTourPage() {
       {/* 3. PERFORMANCE-OPTIMIZED LOADER */}
       <AnimatePresence>
         {loading && !hasError && (
-          <motion.div 
+          <m.div 
             initial={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.8 }}
@@ -86,7 +87,7 @@ export default function VirtualTourPage() {
                 Initializing Stream
               </span>
               <div className="w-32 h-px bg-white/10 relative overflow-hidden">
-                <motion.div 
+                <m.div 
                   initial={{ x: "-100%" }}
                   animate={{ x: "100%" }}
                   transition={{ repeat: Infinity, duration: 1.5, ease: "linear" }}
@@ -94,13 +95,13 @@ export default function VirtualTourPage() {
                 />
               </div>
             </div>
-          </motion.div>
+          </m.div>
         )}
       </AnimatePresence>
 
       {/* 4. IMMERSIVE ENGINE (With Clipping & Scaling) */}
       <div className="absolute inset-0 z-0 overflow-hidden">
-        <motion.div 
+        <m.div 
           animate={{ scale: isMobile ? 1.3 : 1.55 }}
           transition={{ duration: 1 }}
           className="w-full h-full"
@@ -117,7 +118,7 @@ export default function VirtualTourPage() {
             onLoad={handleFrameLoad}
             onError={() => setHasError(true)}
           />
-        </motion.div>
+        </m.div>
         {/* Cinematic Vignette - Masks YouTube Logo edges */}
         <div className="absolute inset-0 pointer-events-none shadow-[inset_0_0_200px_rgba(0,0,0,1)]" />
       </div>
@@ -128,7 +129,7 @@ export default function VirtualTourPage() {
           
           {/* TOP BAR */}
           <div className="flex justify-between items-start pointer-events-auto">
-            <motion.div
+            <m.div
               key={TOURS[activeTour].title}
               initial={{ x: -30, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
@@ -140,7 +141,7 @@ export default function VirtualTourPage() {
               <p className="text-cyan-500/70 text-[8px] md:text-[9px] uppercase tracking-[0.4em] mt-3 font-bold">
                 {TOURS[activeTour].level} • PERSPECTIVE
               </p>
-            </motion.div>
+            </m.div>
 
             <button 
               onClick={() => router.back()}
@@ -152,7 +153,7 @@ export default function VirtualTourPage() {
           </div>
 
           {/* DYNAMIC HINT */}
-          <motion.div 
+          <m.div 
             initial={{ opacity: 0 }}
             animate={{ opacity: loading ? 0 : [0, 1, 1, 0] }}
             transition={{ duration: 6, times: [0, 0.1, 0.9, 1] }}
@@ -164,7 +165,7 @@ export default function VirtualTourPage() {
                 {isMobile ? "Move Device to Look" : "Click & Drag to Orbit"}
               </span>
             </div>
-          </motion.div>
+          </m.div>
 
           {/* BOTTOM NAVIGATION */}
           <div className="flex flex-col md:flex-row justify-between items-end gap-8 pointer-events-auto">

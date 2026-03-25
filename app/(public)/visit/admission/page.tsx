@@ -3,7 +3,7 @@
 import { Container } from "@/components/shared/Container";
 import { Clock, Info, AlertTriangle, CreditCard, CheckCircle2 } from "lucide-react";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { m} from "framer-motion";
 
 const pricingData = {
   standard: [

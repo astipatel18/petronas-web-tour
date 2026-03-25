@@ -1,7 +1,7 @@
 "use client";
 
 import { Container } from "@/components/shared/Container";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import Image from "next/image";
 import { 
   Users, 
@@ -50,7 +50,7 @@ export default function ExperiencePage() {
       {/* 1. CINEMATIC HERO */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
         {/* Animated Background Image (Ken Burns Effect) */}
-        <motion.div 
+        <m.div 
           initial={{ scale: 1.2 }}
           animate={{ scale: 1 }}
           transition={{ duration: 10, ease: "easeOut" }}
@@ -63,29 +63,29 @@ export default function ExperiencePage() {
             className="object-cover opacity-50 grayscale"
             priority
           />
-        </motion.div>
+        </m.div>
 
         {/* Gradient Overlay */}
         <div className="absolute inset-0 bg-linear-to-b from-black/40 via-transparent to-black z-1" />
         
         <div className="relative z-10 text-center px-4">
-          <motion.span 
+          <m.span 
             initial={{ opacity: 0, letterSpacing: "0.1em" }}
             animate={{ opacity: 1, letterSpacing: "0.5em" }}
             transition={{ duration: 1 }}
             className="text-cyan-500 text-xs font-bold uppercase block mb-6"
           >
             The Journey Above
-          </motion.span>
-          <motion.h1 
+          </m.span>
+          <m.h1 
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.2 }}
             className="text-7xl md:text-9xl font-serif tracking-tighter uppercase leading-none"
           >
             The <br /> <span className="text-slate-500 italic">Experience</span>
-          </motion.h1>
-          <motion.div 
+          </m.h1>
+          <m.div 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1.5 }}
@@ -93,7 +93,7 @@ export default function ExperiencePage() {
           >
             <span className="text-[10px] uppercase tracking-widest font-bold">Scroll to start</span>
             <ArrowDownCircle className="animate-bounce w-6 h-6" />
-          </motion.div>
+          </m.div>
         </div>
       </section>
 
@@ -122,7 +122,7 @@ export default function ExperiencePage() {
         <Container>
           <div className="space-y-40">
             {journeySteps.map((step, index) => (
-              <motion.div 
+              <m.div 
                 key={index}
                 initial={{ opacity: 0, y: 100 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -155,7 +155,7 @@ export default function ExperiencePage() {
                   </p>
                   <div className="pt-6 h-px w-20 bg-cyan-500/50" />
                 </div>
-              </motion.div>
+              </m.div>
             ))}
           </div>
         </Container>
@@ -186,14 +186,14 @@ export default function ExperiencePage() {
       <section className="py-32 bg-black">
         <Container className="text-center">
           <h3 className="text-5xl md:text-7xl font-serif italic mb-12">Peak of your journey.</h3>
-          <motion.div whileHover={{ scale: 1.05 }} className="inline-block">
+          <m.div whileHover={{ scale: 1.05 }} className="inline-block">
             <a 
               href="/booking" 
               className="bg-white text-black px-16 py-6 font-bold uppercase tracking-widest text-xs hover:bg-cyan-500 transition-all inline-block"
             >
               Secure Your Experience
             </a>
-          </motion.div>
+          </m.div>
         </Container>
       </section>
 

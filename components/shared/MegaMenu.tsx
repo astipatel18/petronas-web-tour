@@ -2,7 +2,7 @@
 "use client";
 import React from "react";
 import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
+import { m, AnimatePresence } from "framer-motion";
 import { MapPin, Info, Ticket, Users, ArrowRight, Maximize } from "lucide-react";
 
 const visitOptions = [
@@ -46,7 +46,7 @@ export default function MegaMenu({ isOpen, onClose }: { isOpen: boolean; onClose
   return (
     <AnimatePresence>
       {isOpen && (
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 10, x: "-50%" }} 
           animate={{ opacity: 1, y: 0, x: "-50%" }}
           exit={{ opacity: 0, y: 10, x: "-50%" }}
@@ -107,7 +107,7 @@ export default function MegaMenu({ isOpen, onClose }: { isOpen: boolean; onClose
 
           {/* Invisible bridge to keep menu open while moving mouse from Nav to Menu */}
           <div className="absolute -top-4 left-0 w-full h-8 bg-transparent -z-10" />
-        </motion.div>
+        </m.div>
       )}
     </AnimatePresence>
   );

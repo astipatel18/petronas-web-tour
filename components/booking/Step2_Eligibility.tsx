@@ -3,7 +3,7 @@
 
 import { useState } from "react";
 import { useBookingStore } from "@/store/useBookingStore";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { UserCheck, Globe, CheckCircle2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -25,13 +25,13 @@ export default function Step2_Eligibility() {
     <div className="max-w-3xl mx-auto py-12 px-4">
       {/* 1. Context Header */}
       <div className="text-center mb-12">
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           className="inline-block px-3 py-1 bg-cyan-50 text-cyan-700 text-[10px] font-black uppercase tracking-widest mb-4"
         >
           Step 02 — Identification
-        </motion.div>
+        </m.div>
         <h2 className="text-3xl md:text-4xl font-serif text-slate-900 mb-4 uppercase tracking-tight">
           Who is <span className="italic text-slate-500">Visiting?</span>
         </h2>
@@ -64,7 +64,7 @@ export default function Step2_Eligibility() {
       </div>
 
       {/* 3. Footer Trust Note */}
-      <motion.div 
+      <m.div 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.5 }}
@@ -74,7 +74,7 @@ export default function Step2_Eligibility() {
           <CheckCircle2 size={12} className="text-slate-300" />
           Identification will be verified at the check-in counter
         </p>
-      </motion.div>
+      </m.div>
     </div>
   );
 }
@@ -90,7 +90,7 @@ interface CardProps {
 
 function SelectionCard({ title, subtitle, description, icon, isActive, onClick }: CardProps) {
   return (
-    <motion.button
+    <m.button
       whileHover={{ y: -4, scale: 1.02 }}
       whileTap={{ scale: 0.98 }}
       onClick={onClick}
@@ -130,14 +130,14 @@ function SelectionCard({ title, subtitle, description, icon, isActive, onClick }
 
       {/* Active Checkmark Indicator */}
       {isActive && (
-        <motion.div 
+        <m.div 
           initial={{ scale: 0 }} 
           animate={{ scale: 1 }} 
           className="absolute top-4 right-4 text-cyan-600"
         >
           <CheckCircle2 size={24} fill="currentColor" className="text-white" />
-        </motion.div>
+        </m.div>
       )}
-    </motion.button>
+    </m.button>
   );
 }

@@ -12,7 +12,7 @@ import {
   ChevronRight,
   Info
 } from "lucide-react";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 
@@ -158,14 +158,14 @@ export default function Step4_Cart() {
               </div>
             </div>
 
-            <motion.button 
+            <m.button 
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               onClick={() => setStep(5)}
               className="w-full bg-cyan-600 text-white py-5 rounded-2xl font-bold uppercase text-[10px] tracking-[0.2em] shadow-xl shadow-cyan-500/20 hover:bg-cyan-700 transition-all flex items-center justify-center gap-3"
             >
               Secure Checkout <ChevronRight size={14} />
-            </motion.button>
+            </m.button>
 
             <div className="mt-8 space-y-3">
                <div className="flex items-center gap-3 text-[10px] font-bold text-slate-400 uppercase tracking-widest">

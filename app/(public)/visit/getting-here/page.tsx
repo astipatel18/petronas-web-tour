@@ -3,7 +3,7 @@
 import { Container } from "@/components/shared/Container";
 import { Train, Bus, Car, Navigation, MapPin } from "lucide-react";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 
 const transportData = [
   {
@@ -54,7 +54,7 @@ export default function GettingHerePage() {
       {/* 1. HERO HEADER */}
       <section className="pt-48 pb-24 border-b border-white/10 bg-linear-to-b from-slate-900/50 to-black">
         <Container>
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
@@ -66,7 +66,7 @@ export default function GettingHerePage() {
               Getting <br />
               <span className="text-slate-500 italic">Here</span>
             </h1>
-          </motion.div>
+          </m.div>
         </Container>
       </section>
 
@@ -75,7 +75,7 @@ export default function GettingHerePage() {
         <Container>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-white/10 border border-white/10">
             {transportData.map((item, index) => (
-              <motion.div 
+              <m.div 
                 key={index} 
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
@@ -105,7 +105,7 @@ export default function GettingHerePage() {
                     </li>
                   ))}
                 </ul>
-              </motion.div>
+              </m.div>
             ))}
           </div>
         </Container>
@@ -115,7 +115,7 @@ export default function GettingHerePage() {
       <section className="pb-32">
         <Container>
           <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-12">
-            <motion.div 
+            <m.div 
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
@@ -130,9 +130,9 @@ export default function GettingHerePage() {
                 Petronas Twin Towers, <br />
                 Kuala Lumpur City Centre.
               </p>
-            </motion.div>
+            </m.div>
             
-            <motion.div
+            <m.div
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
@@ -144,11 +144,11 @@ export default function GettingHerePage() {
               >
                 Get Directions
               </Link>
-            </motion.div>
+            </m.div>
           </div>
 
           {/* Styled Map Placeholder */}
-          <motion.div 
+          <m.div 
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -162,7 +162,7 @@ export default function GettingHerePage() {
             <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                <span className="bg-white/10 backdrop-blur-md text-white border border-white/20 px-6 py-2 text-[10px] uppercase tracking-widest">View on Map</span>
             </div>
-          </motion.div>
+          </m.div>
         </Container>
       </section>
     </main>

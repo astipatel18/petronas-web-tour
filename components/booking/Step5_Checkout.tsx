@@ -17,7 +17,7 @@ import {
   MapPin,
   AlertCircle
 } from "lucide-react";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 
 export default function Step5_Checkout() {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -55,7 +55,7 @@ export default function Step5_Checkout() {
             <span className="text-xs font-bold text-slate-300 uppercase tracking-widest">/ 06</span>
         </div>
         <div className="grow h-0.5 bg-slate-100 relative overflow-hidden rounded-full">
-            <motion.div 
+            <m.div 
                 initial={{ width: "66%" }}
                 animate={{ width: "83%" }}
                 transition={{ duration: 1, ease: "circOut" }}
@@ -151,7 +151,7 @@ export default function Step5_Checkout() {
 
               {/* ERROR ALERT BOX */}
               {formError && (
-                <motion.div 
+                <m.div 
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
                   className="bg-red-50 border border-red-100 p-4 rounded-sm flex items-center gap-3"
@@ -160,7 +160,7 @@ export default function Step5_Checkout() {
                   <p className="text-red-600 text-[10px] font-bold uppercase tracking-widest leading-relaxed">
                     {formError}
                   </p>
-                </motion.div>
+                </m.div>
               )}
 
               {/* BOTTOM NAVIGATION BUTTONS */}

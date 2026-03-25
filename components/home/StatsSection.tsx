@@ -1,6 +1,6 @@
 // components/home/StatsSection.tsx
 "use client"
-import { motion } from "framer-motion"
+import { m } from "framer-motion"
 import { Container } from "../shared/Container"
 
 const stats = [
@@ -16,7 +16,7 @@ export default function StatsSection() {
       <Container>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
           {stats.map((stat, i) => (
-            <motion.div 
+            <m.div 
               initial={{ opacity: 0, y: 20 }} 
               whileInView={{ opacity: 1, y: 0 }} 
               transition={{ delay: i * 0.1 }}
@@ -26,7 +26,7 @@ export default function StatsSection() {
               <div className="text-4xl md:text-5xl font-bold text-white mb-2">{stat.value}</div>
               <div className="text-cyan-500 font-bold uppercase tracking-widest text-xs mb-1">{stat.label}</div>
               <div className="text-slate-500 text-xs">{stat.sub}</div>
-            </motion.div>
+            </m.div>
           ))}
         </div>
       </Container>

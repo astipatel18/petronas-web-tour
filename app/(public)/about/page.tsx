@@ -2,7 +2,7 @@
 "use client";
 
 import { Container } from "@/components/shared/Container";
-import { motion } from "framer-motion";
+import { m} from "framer-motion";
 import Image from "next/image";
 import { History, Pyramid, Globe, ArrowRight, Zap, Award, CheckCircle2 } from "lucide-react";
 import Link from "next/link";
@@ -49,7 +49,7 @@ export default function AboutPage() {
         <div className="absolute inset-0 bg-linear-to-b from-black/60 via-transparent to-deep-slate z-1" />
         
         <Container className="relative z-10">
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
@@ -65,7 +65,7 @@ export default function AboutPage() {
             <p className="mt-6 text-slate-300 text-lg leading-relaxed font-light">
               Explore the history, architectural innovation, and the cultural legacy of Malaysia&apos;s most iconic twin titans.
             </p>
-          </motion.div>
+          </m.div>
         </Container>
       </section>
 
@@ -73,7 +73,7 @@ export default function AboutPage() {
       <section className="py-20 md:py-28">
         <Container>
           <div className="grid md:grid-cols-2 gap-16 items-center">
-            <motion.div 
+            <m.div 
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
@@ -91,7 +91,7 @@ export default function AboutPage() {
                   </li>
                 ))}
               </ul>
-            </motion.div>
+            </m.div>
             <div className="relative h-100 rounded-none border border-white/10 overflow-hidden bg-black/40">
               <Image src={`${IMAGES.DETAIL}?q=80&w=1000`} alt="Detail" fill className="object-cover grayscale" />
             </div>
@@ -106,7 +106,7 @@ export default function AboutPage() {
             <div className="relative h-100 order-2 md:order-1 border border-white/10 overflow-hidden bg-black/40">
               <Image src={`${IMAGES.ARCH}?q=80&w=1000`} alt="Architecture" fill className="object-cover grayscale" />
             </div>
-            <motion.div 
+            <m.div 
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
@@ -128,7 +128,7 @@ export default function AboutPage() {
                   <p className="text-[10px] text-slate-500">Design Consensus</p>
                 </div>
               </div>
-            </motion.div>
+            </m.div>
           </div>
         </Container>
       </section>
@@ -138,7 +138,7 @@ export default function AboutPage() {
         <Container>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-white/10 border border-white/10">
             {stats.map((stat, i) => (
-              <motion.div 
+              <m.div 
                 key={i} 
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
@@ -149,7 +149,7 @@ export default function AboutPage() {
                 <h4 className="text-5xl font-black text-white mb-2 tracking-tighter">{stat.value}</h4>
                 <p className="text-cyan-500 text-[10px] uppercase tracking-widest font-bold mb-2">{stat.label}</p>
                 <p className="text-slate-600 text-[10px] uppercase">{stat.detail}</p>
-              </motion.div>
+              </m.div>
             ))}
           </div>
         </Container>

@@ -1,7 +1,7 @@
 // components/home/SocialProof.tsx
 "use client";
 
-import { motion, useInView, useMotionValue, useSpring } from "framer-motion";
+import { m, useInView, useMotionValue, useSpring } from "framer-motion";
 import { useRef, useEffect } from "react";
 import { Container } from "../shared/Container";
 import { Star, Users, Award } from "lucide-react";
@@ -72,7 +72,7 @@ export default function SocialProof() {
       <Container>
         <div className="flex flex-col md:flex-row justify-between items-center gap-16 md:gap-8">
           {proofStats.map((stat, i) => (
-            <motion.div
+            <m.div
               key={i}
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -104,7 +104,7 @@ export default function SocialProof() {
               {i < proofStats.length - 1 && (
                 <div className="hidden lg:block absolute -right-20 top-1/2 -translate-y-1/2 h-16 w-px bg-white/10" />
               )}
-            </motion.div>
+            </m.div>
           ))}
         </div>
       </Container>

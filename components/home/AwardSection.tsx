@@ -1,7 +1,7 @@
 // components/home/AwardSection.tsx
 "use client";
 
-import { motion, useInView } from "framer-motion";
+import { m, useInView } from "framer-motion";
 import { useRef } from "react";
 import { Container } from "../shared/Container";
 import { Star } from "lucide-react";
@@ -17,7 +17,7 @@ export default function AwardSection() {
     >
       <Container className="text-center">
         {/* 1. THE BADGE: Tripadvisor Recognition */}
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, ease: "easeOut" }}
@@ -28,10 +28,10 @@ export default function AwardSection() {
             Tripadvisor Traveller&apos;s Choice 2024
           </span>
           <Star className="w-3 h-3 text-gold fill-gold" />
-        </motion.div>
+        </m.div>
 
         {/* 2. THE QUOTE: Emotional Hook */}
-        <motion.div
+        <m.div
           initial={{ opacity: 0, scale: 0.95 }}
           animate={isInView ? { opacity: 1, scale: 1 } : {}}
           transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
@@ -50,10 +50,10 @@ export default function AwardSection() {
           <span className="absolute -bottom-20 right-0 md:right-20 text-white/5 text-9xl font-serif select-none">
             &rdquo;
           </span>
-        </motion.div>
+        </m.div>
 
         {/* 3. SUBTLE DIVIDER */}
-        <motion.div 
+        <m.div 
           initial={{ width: 0 }}
           animate={isInView ? { width: "80px" } : {}}
           transition={{ duration: 1, delay: 0.8 }}

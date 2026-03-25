@@ -3,7 +3,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { motion } from "framer-motion"; // 🛡️ Fixed: Added missing import
+import { m } from "framer-motion"; // 🛡️ Fixed: Added missing import
 import { 
   LayoutDashboard, 
   Users, 
@@ -77,7 +77,7 @@ export default function NavLinks() {
             {/* Premium Indicator for Active Link */}
             {/* layoutId ensures the pill "slides" between links instead of disappearing */}
             {isActive && (
-              <motion.div 
+              <m.div 
                 layoutId="active-pill"
                 className="absolute left-0 w-1 h-5 bg-black rounded-r-full z-20"
                 transition={{ type: "spring", stiffness: 300, damping: 30 }}

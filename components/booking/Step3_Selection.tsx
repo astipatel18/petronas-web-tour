@@ -3,7 +3,7 @@
 
 import { useState } from "react";
 import { useBookingStore } from "@/store/useBookingStore";
-import { motion, AnimatePresence } from "framer-motion";
+import { m, AnimatePresence } from "framer-motion";
 import { 
   Clock, 
   Plus, 
@@ -69,7 +69,7 @@ export default function Step3_Selection() {
 
       <AnimatePresence>
         {isExpanded && (
-          <motion.div 
+          <m.div 
             initial={{ height: 0, opacity: 0, y: 20 }}
             animate={{ height: "auto", opacity: 1, y: 0 }}
             exit={{ height: 0, opacity: 0, y: 10 }}
@@ -202,7 +202,7 @@ export default function Step3_Selection() {
                   </div>
                 </div>
 
-                <motion.button 
+                <m.button 
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   // 🛡️ SECURITY: Only allow proceed if ALL data is present
@@ -211,10 +211,10 @@ export default function Step3_Selection() {
                   className="w-full md:w-auto bg-black text-white px-12 py-5 rounded-full font-bold uppercase text-[10px] tracking-[0.2em] shadow-xl shadow-slate-200 hover:bg-slate-800 transition-all disabled:opacity-20 disabled:grayscale cursor-pointer"
                 >
                   {(!selectedDate || !selectedTime) ? "Select Date & Time" : "Confirm & Add to Cart"}
-                </motion.button>
+                </m.button>
               </div>
             </div>
-          </motion.div>
+          </m.div>
         )}
       </AnimatePresence>
     </div>

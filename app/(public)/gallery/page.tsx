@@ -2,7 +2,7 @@
 "use client";
 
 import { useState, useRef } from "react";
-import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
+import { m, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
 import { Container } from "@/components/shared/Container";
 import { X, ChevronLeft, ChevronRight, Camera, ArrowRight, Eye } from "lucide-react";
@@ -77,7 +77,7 @@ export default function GalleryPage() {
 
       {/* 🚀 CINEMATIC HERO */}
       <section ref={heroRef} className="relative h-[90vh] flex items-center justify-center overflow-hidden">
-        <motion.div style={{ y }} className="absolute inset-0">
+        <m.div style={{ y }} className="absolute inset-0">
           <Image
             src="https://images.unsplash.com/photo-1544918877-460635b6d13e?q=80&w=2000"
             alt="Hero Background"
@@ -85,11 +85,11 @@ export default function GalleryPage() {
             className="object-cover opacity-60 scale-110"
             priority
           />
-        </motion.div>
+        </m.div>
         <div className="absolute inset-0 bg-linear-to-b from-black/40 via-transparent to-[#050505]" />
 
         <Container className="relative z-10 text-center">
-          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1.2 }}>
+          <m.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1.2 }}>
             <Camera className="w-12 h-12 text-cyan-500 mx-auto mb-8 opacity-40" />
             <h1 className="text-7xl md:text-9xl font-serif leading-none tracking-tighter uppercase">
               Visual <br /> <span className="text-gray-500 italic">Narrative</span>
@@ -97,7 +97,7 @@ export default function GalleryPage() {
             <p className="mt-8 text-gray-400 uppercase tracking-[0.6em] text-[10px] font-bold">
               Kuala Lumpur through the lens
             </p>
-          </motion.div>
+          </m.div>
         </Container>
       </section>
 
@@ -129,7 +129,7 @@ export default function GalleryPage() {
 
             return (
               <div key={phase} className="mb-40">
-                <motion.div 
+                <m.div 
                   initial={{ opacity: 0 }} 
                   whileInView={{ opacity: 1 }} 
                   className="flex items-center gap-8 mb-16"
@@ -137,11 +137,11 @@ export default function GalleryPage() {
                   <h2 className="text-5xl md:text-6xl font-serif italic text-white/90">{phase}</h2>
                   <div className="h-px grow bg-linear-to-r from-white/20 to-transparent" />
                   <span className="text-[10px] font-mono text-gray-600">CHAPTER 0{pIdx + 1}</span>
-                </motion.div>
+                </m.div>
 
                 <div className="columns-1 md:columns-2 lg:columns-3 gap-8 space-y-8">
                   {phaseImages.map((img, idx) => (
-                    <motion.div
+                    <m.div
                       key={img.id}
                       initial={{ opacity: 0, y: 20 }}
                       whileInView={{ opacity: 1, y: 0 }}
@@ -165,7 +165,7 @@ export default function GalleryPage() {
                         </div>
                         <h4 className="text-2xl font-serif italic text-white">{img.title}</h4>
                       </div>
-                    </motion.div>
+                    </m.div>
                   ))}
                 </div>
               </div>
@@ -192,7 +192,7 @@ export default function GalleryPage() {
       {/* 🖼️ ADVANCED LIGHTBOX */}
       <AnimatePresence>
         {lightboxIndex !== null && (
-          <motion.div
+          <m.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -217,7 +217,7 @@ export default function GalleryPage() {
             </button>
 
             <div className="w-full max-w-6xl flex flex-col items-center">
-              <motion.div 
+              <m.div 
                 key={lightboxIndex}
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
@@ -230,7 +230,7 @@ export default function GalleryPage() {
                   className="object-contain"
                   priority
                 />
-              </motion.div>
+              </m.div>
               
               <div className="mt-12 text-center max-w-2xl px-6">
                 <p className="text-cyan-500 font-bold uppercase tracking-[0.4em] text-[10px]">
@@ -242,7 +242,7 @@ export default function GalleryPage() {
                 </p>
               </div>
             </div>
-          </motion.div>
+          </m.div>
         )}
       </AnimatePresence>
     </div>

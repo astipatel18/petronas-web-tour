@@ -1,7 +1,7 @@
 // components/home/VerticalStats.tsx
 "use client";
 
-import { motion, useInView, useMotionValue, useSpring } from "framer-motion";
+import { m, useInView, useMotionValue, useSpring } from "framer-motion";
 import { useRef, useEffect } from "react";
 import { Container } from "../shared/Container";
 
@@ -67,7 +67,7 @@ export default function VerticalStats() {
       <Container>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-24 md:gap-12 lg:gap-20 items-start">
           {stats.map((stat, i) => (
-            <motion.div
+            <m.div
               key={i}
               initial={{ opacity: 0, y: 40 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -80,7 +80,7 @@ export default function VerticalStats() {
               </h3>
 
               {/* Engineering Accent Line */}
-              <motion.div 
+              <m.div 
                 initial={{ width: 0 }}
                 animate={isInView ? { width: "48px" } : {}}
                 transition={{ delay: 0.5 + i * 0.2, duration: 1 }}
@@ -99,7 +99,7 @@ export default function VerticalStats() {
 
               {/* Subtle vertical glow effect on hover */}
               <div className="absolute -inset-y-10 left-1/2 -translate-x-1/2 w-px bg-linear-to-b from-transparent via-cyan-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
-            </motion.div>
+            </m.div>
           ))}
         </div>
       </Container>
