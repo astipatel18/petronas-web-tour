@@ -187,11 +187,9 @@ const isDev = process.env.NODE_ENV === "development";
  * 🛡️ TITAN SECURE CONTENT SECURITY POLICY (CSP)
  * 
  * - default-src 'self': Restricts all content to our own domain by default.
- * - script-src: 'self' + 'unsafe-inline'. We add 'unsafe-eval' ONLY in dev for Turbopack HMR.
- * - style-src: 'self' + 'unsafe-inline' is required for Tailwind CSS v4 and Framer Motion.
- * - img-src: Strictly allows local images and high-res architecture from Unsplash.
- * - media-src: Allows local video files (hero-bg.mp4) and trusted external video hosts.
- * - frame-src: Specific whitelist for the 360° Virtual Tour (Google Maps).
+ * - script-src: Added YouTube and Google domains to allow the 360° player logic.
+ * - frame-src: Specific whitelist for YouTube Embeds and Google Maps.
+ * - img-src: Added i.ytimg.com for YouTube video thumbnails.
  */
 const getCspHeader = () => {
   const policy = {
@@ -199,19 +197,45 @@ const getCspHeader = () => {
     "script-src": [
       "'self'",
       "'unsafe-inline'",
+      "https://www.youtube.com",
+      "https://s.ytimg.com",
+      "https://maps.googleapis.com",
       // 🚀 Add 'unsafe-eval' only in development to fix Next.js/Turbopack errors
       ...(isDev ? ["'unsafe-eval'"] : []),
     ],
     "style-src": ["'self'", "'unsafe-inline'"],
-    "img-src": ["'self'", "blob:", "data:", "https://images.unsplash.com"],
+    "img-src": [
+      "'self'", 
+      "blob:", 
+      "data:", 
+      "https://images.unsplash.com", 
+      "https://i.ytimg.com", // 🎥 YouTube Thumbnails
+      "https://maps.gstatic.com",
+      "https://maps.googleapis.com"
+    ],
     "font-src": ["'self'", "data:"],
     "object-src": ["'none'"],
     "base-uri": ["'self'"],
     "form-action": ["'self'"],
-    "frame-src": ["'self'", "https://www.google.com", "https://www.google.com/maps"],
-    "media-src": ["'self'", "blob:", "data:", "https://assets.mixkit.co"], // 🎥 Added for Hero Video
+    "frame-src": [
+      "'self'", 
+      "https://www.youtube.com", 
+      "https://www.youtube-nocookie.com", 
+      "https://www.google.com", 
+      "https://www.google.com/maps"
+    ],
+    "media-src": [
+      "'self'", 
+      "blob:", 
+      "data:", 
+      "https://assets.mixkit.co"
+    ],
     "frame-ancestors": ["'none'"],
-    "connect-src": ["'self'"],
+    "connect-src": [
+      "'self'", 
+      "https://www.youtube.com", 
+      "https://google.com"
+    ],
     "upgrade-insecure-requests": [],
   };
 

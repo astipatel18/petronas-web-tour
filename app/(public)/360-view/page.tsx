@@ -1,8 +1,8 @@
+// app/(public)/360-view/page.tsx
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
 import { useRouter } from "next/navigation";
-// import { motion, AnimatePresence } from "framer-motion";
 import { m , AnimatePresence} from "framer-motion";
 import { Container } from "@/components/shared/Container";
 import { 
@@ -106,7 +106,7 @@ export default function VirtualTourPage() {
           transition={{ duration: 1 }}
           className="w-full h-full"
         >
-          <iframe
+          {/* <iframe
             key={TOURS[activeTour].embedId}
             title={`360 degree view of ${TOURS[activeTour].title}`}
             aria-label={`Interactive 360 virtual tour of ${TOURS[activeTour].title}`}
@@ -117,7 +117,19 @@ export default function VirtualTourPage() {
             className="w-full h-full brightness-[0.85] contrast-[1.1] pointer-events-auto"
             onLoad={handleFrameLoad}
             onError={() => setHasError(true)}
-          />
+          /> */}
+          <iframe
+  key={TOURS[activeTour].embedId}
+  title={`360 degree view of ${TOURS[activeTour].title}`}
+  // 🚀 FIXED SRC SYNTAX BELOW
+  src={`https://www.youtube.com/embed/${TOURS[activeTour].embedId}?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&iv_load_policy=3&enablejsapi=1&playsinline=1`}
+  width="100%"
+  height="100%"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+  className="w-full h-full brightness-[0.85] contrast-[1.1] pointer-events-auto"
+  onLoad={handleFrameLoad}
+  onError={() => setHasError(true)}
+/>
         </m.div>
         {/* Cinematic Vignette - Masks YouTube Logo edges */}
         <div className="absolute inset-0 pointer-events-none shadow-[inset_0_0_200px_rgba(0,0,0,1)]" />
