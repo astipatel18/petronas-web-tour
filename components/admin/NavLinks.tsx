@@ -1,19 +1,19 @@
-// components/admin/Navlinks.tsx
 "use client";
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { m } from "framer-motion"; // 🛡️ Fixed: Added missing import
+import { m } from "framer-motion";
 import { 
   LayoutDashboard, 
   Users, 
   Ticket, 
   Settings, 
-  ShieldAlert 
+  ShieldAlert,
+  Ghost // 🚀 Added for Bot Tracking
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-// Define the navigation structure
+// Updated navigation structure
 const links = [
   { 
     name: "Overview", 
@@ -36,6 +36,12 @@ const links = [
     icon: ShieldAlert 
   },
   { 
+    // 🕵️‍♂️ NEW: Bot Sightings (Intelligence Dashboard)
+    name: "Bot Sightings", 
+    href: "/admin/bots", 
+    icon: Ghost 
+  },
+  { 
     name: "Settings", 
     href: "/admin/settings", 
     icon: Settings 
@@ -49,7 +55,6 @@ export default function NavLinks() {
     <div className="space-y-1">
       {links.map((link) => {
         const LinkIcon = link.icon;
-        // Check if current path matches the link
         const isActive = pathname === link.href;
         
         return (
@@ -63,7 +68,7 @@ export default function NavLinks() {
                 : "text-slate-400 hover:text-white hover:bg-white/5"
             )}
           >
-            {/* Icon handling with active state coloring */}
+            {/* Icon with active/hover state transitions */}
             <LinkIcon 
               size={18} 
               className={cn(
@@ -75,7 +80,6 @@ export default function NavLinks() {
             <span className="relative z-10">{link.name}</span>
 
             {/* Premium Indicator for Active Link */}
-            {/* layoutId ensures the pill "slides" between links instead of disappearing */}
             {isActive && (
               <m.div 
                 layoutId="active-pill"

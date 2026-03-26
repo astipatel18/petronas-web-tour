@@ -234,7 +234,9 @@ const getCspHeader = () => {
     "connect-src": [
       "'self'", 
       "https://www.youtube.com", 
-      "https://google.com"
+      "https://google.com",
+      "https://images.unsplash.com",
+      "*.upstash.io"
     ],
     "upgrade-insecure-requests": [],
   };
