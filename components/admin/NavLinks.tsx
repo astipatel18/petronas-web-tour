@@ -9,7 +9,8 @@ import {
   Ticket, 
   Settings, 
   ShieldAlert,
-  Ghost // 🚀 Added for Bot Tracking
+  Ghost,
+  CalendarDays // 🚀 FIXED: Added the missing import here
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -26,6 +27,11 @@ const links = [
     icon: Ticket 
   },
   { 
+    name: "Pricing & Holidays",
+    href: "/admin/holidays",
+    icon: CalendarDays // 🚀 Now recognized by TypeScript
+  },
+  { 
     name: "Visitors", 
     href: "/admin/users", 
     icon: Users 
@@ -36,7 +42,6 @@ const links = [
     icon: ShieldAlert 
   },
   { 
-    // 🕵️‍♂️ NEW: Bot Sightings (Intelligence Dashboard)
     name: "Bot Sightings", 
     href: "/admin/bots", 
     icon: Ghost 
@@ -77,13 +82,13 @@ export default function NavLinks() {
               )} 
             />
             
-            <span className="relative z-10">{link.name}</span>
+            <span className="relative z-10 font-bold tracking-tight">{link.name}</span>
 
             {/* Premium Indicator for Active Link */}
             {isActive && (
               <m.div 
                 layoutId="active-pill"
-                className="absolute left-0 w-1 h-5 bg-black rounded-r-full z-20"
+                className="absolute left-0 w-1.5 h-6 bg-black rounded-r-full z-20"
                 transition={{ type: "spring", stiffness: 300, damping: 30 }}
               />
             )}

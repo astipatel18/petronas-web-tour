@@ -4,6 +4,7 @@ import { auth } from "@/auth";
 import { dbConnect } from "./mongodb";
 import Booking from "@/models/Booking";
 import User from "@/models/User";
+import Holiday from "@/models/Holiday"; // 🚀 Added Holiday model import
 import { logEvent } from "./logger";
 import { sendCancellationEmail } from "./mailer";
 import { revalidatePath } from "next/cache";
@@ -22,6 +23,57 @@ async function ensureAdmin() {
 }
 
 /**
+ * 📅 ACTION: addHoliday
+ * Creates a new peak-pricing date in the system.
+ */
+export async function addHoliday(formData: FormData) {
+  const session = await ensureAdmin();
+
+  try {
+    await dbConnect();
+    const name = formData.get("name") as string;
+    const date = formData.get("date") as string;
+    // Logic: Convert human input (e.g., 25) to decimal (0.25)
+    const multiplier = Number(formData.get("multiplier")) / 100;
+
+    // Check if a holiday already exists for this specific date
+    const existing = await Holiday.findOne({ date });
+    if (existing) throw new Error(`A peak day is already set for ${date}`);
+
+    await Holiday.create({ name, date, multiplier });
+
+    await logEvent("INFO", "HOLIDAY_ADDED", `Peak day '${name}' added for ${date} by ${session.user.email}`);
+
+    revalidatePath("/admin/holidays");
+    return { success: true };
+  } catch (error: any) {
+    return { success: false, error: error.message };
+  }
+}
+
+/**
+ * 🗑️ ACTION: deleteHoliday
+ * Removes a holiday and returns that date to standard pricing.
+ */
+export async function deleteHoliday(id: string) {
+  const session = await ensureAdmin();
+
+  try {
+    await dbConnect();
+    const deleted = await Holiday.findByIdAndDelete(id);
+
+    if (deleted) {
+      await logEvent("WARNING", "HOLIDAY_DELETED", `Peak pricing removed for ${deleted.date} by ${session.user.email}`);
+    }
+
+    revalidatePath("/admin/holidays");
+    return { success: true };
+  } catch (error: any) {
+    return { success: false, error: error.message };
+  }
+}
+
+/**
  * 🎟️ ACTION: processCancellation
  * Secured Server Action to void a booking and notify the customer.
  */
@@ -36,10 +88,8 @@ export async function processCancellation(bookingId: string, reason: string = "C
     if (booking.status === "cancelled") return { success: true, message: "Already cancelled" };
 
     booking.status = "cancelled";
-    booking.cancellation = {
-      reason,
-      cancelledAt: new Date(),
-    };
+    // Using simple assignment if schema doesn't strictly define nested cancellation object
+    booking.cancelledAt = new Date();
 
     await booking.save();
 

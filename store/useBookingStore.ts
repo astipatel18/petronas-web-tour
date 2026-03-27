@@ -1,4 +1,3 @@
-// store/useBookingStore.ts
 import { create } from 'zustand';
 
 // 1. Define the Attraction Interface for Type Safety
@@ -20,8 +19,11 @@ interface BookingState {
   selectedTime: string;
   tickets: { adult: number; child: number; senior: number };
   
+  // 💰 DYNAMIC PRICING STATE
+  // Stores the final price verified by the server API
+  totalPrice: number; 
+
   // 🛡️ OTP / VERIFICATION STATE
-  // Stores the email address entered in Step 5 so it can be displayed in Step 6
   tempEmail: string; 
   
   // --- NAVIGATION ACTIONS ---
@@ -34,16 +36,19 @@ interface BookingState {
   setEligibility: (isLocal: boolean) => void;
   
   // --- STEP 3: SCHEDULE & QUANTITY ---
+  // 🚀 These now reset totalPrice to 0 to trigger a re-fetch in the UI
   setDate: (date: string) => void;
   setTime: (time: string) => void;
   updateTickets: (type: TicketType, val: number) => void;
   
+  // --- 💰 PRICE ACTIONS ---
+  setTotalPrice: (price: number) => void; 
+  
   // --- STEP 5 -> 6: VERIFICATION HANDSHAKE ---
   setTempEmail: (email: string) => void;
 
-  // --- 💰 PRICE COMPUTATION ---
-  // Calculates real-time total based on nationality and ticket mix
-  getTotalPrice: () => number;
+  // --- 🛠️ UI HELPERS ---
+  getEstimate: () => number;
 
   // --- SYSTEM UTILS ---
   reset: () => void;
@@ -57,6 +62,7 @@ export const useBookingStore = create<BookingState>((set, get) => ({
   selectedDate: "",
   selectedTime: "",
   tickets: { adult: 0, child: 0, senior: 0 },
+  totalPrice: 0, 
   tempEmail: "",
 
   // --- NAVIGATION ---
@@ -70,33 +76,44 @@ export const useBookingStore = create<BookingState>((set, get) => ({
 
   setEligibility: (isLocal) => set({ 
     isMalaysian: isLocal, 
-    step: 3 
+    step: 3,
+    totalPrice: 0 // Invalidate price when nationality changes
   }),
 
-  // --- STEP 3 INTERACTIVITY ---
-  setDate: (date) => set({ selectedDate: date }),
+  // --- STEP 3 INTERACTIVITY (FIXED FOR DYNAMIC TRIGGERING) ---
   
-  setTime: (time) => set({ selectedTime: time }),
+  setDate: (date) => set({ 
+    selectedDate: date, 
+    totalPrice: 0 // 🚀 Reset forces UI to show "calculating" and re-fetch API
+  }),
+  
+  setTime: (time) => set({ 
+    selectedTime: time, 
+    totalPrice: 0 // 🚀 Reset forces UI to show "calculating" and re-fetch API
+  }),
 
   updateTickets: (type, val) => set((state) => ({
     tickets: { 
         ...state.tickets, 
         [type]: Math.max(0, val) 
-    }
+    },
+    totalPrice: 0 // 🚀 Reset price so server re-verifies new quantity with surges
   })),
 
+  // --- 💰 DYNAMIC PRICE SAVER ---
+  setTotalPrice: (price) => set({ totalPrice: price }),
+
   // --- 🛡️ VERIFICATION LOGIC ---
-  // Called when the user clicks 'Verify' in Step 5
   setTempEmail: (email) => set({ tempEmail: email }),
 
-  // --- 💰 DYNAMIC PRICE CALCULATOR ---
-  getTotalPrice: () => {
+  // --- 🛠️ ESTIMATE HELPER ---
+  getEstimate: () => {
     const { isMalaysian, tickets } = get();
-    
-    // Official Pricing Logic (Can be moved to a config file for easier updates)
+    if (isMalaysian === null) return 0;
+
     const rates = isMalaysian 
-      ? { adult: 35, senior: 25, child: 17 }  // MYKAD Rates
-      : { adult: 98, senior: 75, child: 50 }; // STANDARD Rates
+      ? { adult: 35, senior: 25, child: 17 }
+      : { adult: 98, senior: 75, child: 50 };
       
     return (
       (tickets.adult * rates.adult) +
@@ -106,7 +123,6 @@ export const useBookingStore = create<BookingState>((set, get) => ({
   },
 
   // --- GLOBAL RESET ---
-  // Clears all PII (Personally Identifiable Information) and selections
   reset: () => set({ 
     step: 1, 
     selectedAttraction: null, 
@@ -114,6 +130,7 @@ export const useBookingStore = create<BookingState>((set, get) => ({
     selectedDate: "", 
     selectedTime: "", 
     tickets: { adult: 0, child: 0, senior: 0 },
+    totalPrice: 0,
     tempEmail: "" 
   }),
 }));
